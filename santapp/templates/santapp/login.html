@@ -1,0 +1,36 @@
+{% extends "santapp/base.html" %}
+{% block content %}
+
+<main>
+    <!-- user registration form -->
+    <div>
+        <form method="POST">
+            <div class="field-div">
+                {% csrf_token %}
+                <fieldset class="field-set">
+                    <!-- {# form #} -->
+                    <div class="field-wrapper">
+                        {{ form.username.errors }}
+                        <label class="field-label">Username</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.password.errors }}
+                        <label class="field-label">Senha</label>
+                        {{ form.password }}
+                    </div>
+                </fieldset>
+            </div>
+            <div class="field-div-button div-button">
+                <!-- Button -->
+                <button type="submit" class="button">Log in</button>
+            </div>
+        </form>
+        <div class="field-div">
+            <!-- Need an account? -->
+            <p>Precisa de uma conta? <a href="{% url 'user-registration' %}">Sign up</a></p>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "santapp/base.html" %}
+{% block content %}
+
+<main class="landing-page-main">
+    <h1 class="orange-text">Pronto pra festa?</h1>
+    <p>Crie ou entre na Room para festejar com seus amigos!</p>
+
+    {% if user.is_authenticated %}
+        <div class="div-selection-tiles">
+            <div class="selection-tile" id="room-joining-div">
+                <h2 class="orange-text">Entrar numa Room</h2>
+                <p>Selecione a Room em que foi incluído e veja todas informações 
+                    de data, hora, quem participa e até quem comprou presente!</p>
+            </div>
+            <div class="selection-tile" id="room-creation-div">
+                <h2 class="orange-text">Criar uma Room</h2>
+                <p>Organize a Room do seu jeito: amigo oculto, amigo oculto 
+                    e amigo da onça, as regras, os participantes, data, local e hora.
+                    A partir daqui é só relaxar, o sistema cuida da sua organização!</p>
+            </div>
+        </div>
+    {% endif %}
+    
+    <div>
+        <p>Algumas funcionalidades do sistema</p>
+        <h3 class="orange-text">AINDA SOB CONSTRUÇÃO</h3>
+    </div>
+</main>
+
+{% endblock %}

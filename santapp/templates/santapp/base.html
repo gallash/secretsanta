@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'santapp/styles.css' %}">
+        <title>SantApp</title>
+
+        <script src="{% static 'santapp/jquery.js' %}"></script>
+        <script src="{% static 'santapp/main.js' %}"></script>
+    </head>
+
+    <body class="background-style-postings">
+        <header class="body-header">
+            <!-- Nav bar | I can import it from another of my projects, gallas.pythonanywhere -->
+            <a class="navbar-gallas" href="{% url 'landing-page' %}">SantApp</a>
+
+            <ul class="navbar-register">
+                {% if user.is_authenticated %} <!-- User is logged in -->
+                    <!-- Toggle list: a) dashboard/profile/menu, b) log out -->
+                    {% if user.is_staff %}
+                        <div class="navbar-dropdown">
+                            <button class="button navbar-button">Staff: {{ user }}</button>
+                            <div class="navbar-dropdown-menu">
+                                <ul class="navbar-ul">
+                                    <li><a class="navbar-anchors" href="{% url 'staff-dashboard' %}">Perfil</a></li>
+                                    <li><a class="navbar-anchors" href="{% url 'logout' %}">Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% else %} <!-- If a customer -->
+                        <div class="navbar-dropdown">
+                            <button class="button navbar-button">{{ user }}</button>
+                            <div class="navbar-dropdown-menu">
+                                <ul class="navbar-ul">
+                                    <li><a class="navbar-anchors" href="{% url 'event-dashboard' %}">Perfil</a></li>
+                                    <li><a class="navbar-anchors" href="{% url 'logout' %}">Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% else %} <!-- If user is not logged in -->
+                    <a class="navbar-anchors" href="{% url 'login' %}">Sign in</a>
+                    <a class="navbar-anchors" href="{% url 'user-registration' %}">Sign up</a>
+                {% endif %}
+            </ul>
+        </header>
+        
+        
+        
+        <!-- Mensagens -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <p>{{message}}</p>
+                </div>
+                
+            {% endfor %}
+        {% endif %}
+        
+        
+        
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

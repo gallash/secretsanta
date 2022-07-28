@@ -1,0 +1,66 @@
+{% extends "santapp/base.html" %}
+{% block content %}
+
+<main>
+    <!-- user registration form -->
+    <div>
+        <form method="POST">
+            <div class="field-div">
+                {% csrf_token %}
+                <fieldset class="field-set">
+                    <!-- To avoid doing it manually, just encapsulate 'form' in nested curly braces -->
+                    {{ form.non_field_errors }}
+                    <div class="field-wrapper">
+                        {{ form.username.errors }}
+                        <label class="field-label">Username</label>
+                        {{ form.username }}
+
+                        {% if form.username.errors %}
+                            <ol>
+                                {% for error in form.subject.errors %}
+                                    <li><strong>{{ error|escape }}</strong></li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.first_name.errors }}
+                        <label class="field-label">First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.last_name.errors }}
+                        <label class="field-label">Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.email.errors }}
+                        <label class="field-label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.password1.errors }}
+                        <label class="field-label">Entre uma senha</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.password2.errors }}
+                        <label class="field-label">Confirme a senha</label>
+                        {{ form.password2 }}
+                    </div>
+                </fieldset>
+            </div>
+            <div class="div-button field-div-button">
+                <!-- Button -->
+                <button type="submit" class="button">Sign up</button>
+            </div>
+
+        </form>
+        <div class="field-div">
+            <!-- Already have an account? -->
+            <p>Já possui uma conta? <a href="{% url 'login' %}">Log in</a></p>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

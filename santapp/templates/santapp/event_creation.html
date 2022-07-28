@@ -1,0 +1,80 @@
+{% extends "santapp/base.html" %}
+{% block content %}
+
+<main>
+    <!-- user registration form -->
+    <div>
+        <form method="POST">
+
+
+            <div class="field-div">
+                <h1 class="orange-text">Criação da Room</h1>
+
+                {% csrf_token %}
+                <!-- EVENT CREATION FORM -->
+                <fieldset class="field-set">
+                    {{ form.non_field_errors }}
+                    <div class="field-wrapper">
+                        {{ form.event_name.errors }}
+                        <label class="field-label">Nome da Room</label>
+                        {{ form.event_name }}
+
+                        {% if form.event_name.errors %}
+                            <ol>
+                                {% for error in form.event_name.errors %}
+                                    <li><strong>{{ error|escape }}</strong></li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.is_remote.errors }}
+                        <label class="field-label">É remoto?</label>
+                        {{ form.is_remote }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.place.errors }}
+                        <label class="field-label">Endereço</label>
+                        {{ form.place }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.online_meeting_link.errors }}
+                        <label class="field-label">Link da Meeting</label>
+                        {{ form.online_meeting_link }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.rules.errors }}
+                        <label class="field-label">Regras da Room</label>
+                        {{ form.rules }}
+                    </div>
+                    <div class="field-wrapper">
+                        {{ form.price_range.errors }}
+                        <label class="field-label">Faixa de Preço -- opcional ;)</label>
+                        {{ form.price_range }}
+                    </div>
+
+                    
+                    <!-- PARTICIPANTS CREATION VIA JS APPENDING OF HTML CODE -->
+                    <div class="field-wrapper" id="participants-creation-div">
+                        <h2 class="orange-text">Adicione os participantes</h2>
+                        
+                        <div class="div-participants">
+                            <label class="field-label">Primeiro Nome</label>
+                            <input type="text" id="user1"> 
+                        </div>
+
+
+                    </div>
+                </fieldset>
+            </div>
+            
+
+            <!-- Button -->
+            <div class="div-button field-div-button">
+                <button type="submit" class="button">Criar Room</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock %}
